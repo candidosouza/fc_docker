@@ -1,3 +1,5 @@
+## Iniciando
+
 
 > baixar uma imagem e entrar no contêineres pelo bash
 
@@ -11,12 +13,14 @@ https://hub.docker.com/
 
 > baixar uma imagem e entrar no contêiner em background
 
-* --detach
+* --detach = separar, separa o container, libera o terminal e roda o container em background
 
 docker run -d id-do-contêiner
 
 
 > baixar uma imagem e entrar no conteiner em background e na porta 8080 do localhost
+
+* -d = --detach, -p = --port, 8080 porta local, 80 porta do container
 
 docker run -d -p 8080:80 nome-do-conteiner
 
@@ -56,9 +60,11 @@ listar todos
 
 docker ps -a ou --all
 
-> parar um contêiner
+> parar um contêiner, o container não é desistalado, apenas parado
 
 docker stop id-do-contêiner
+
+* stop = parar
 
 > remover um contêiner que está parado
 
@@ -69,6 +75,8 @@ docker rm id-do-contêiner
 docker rm id-do-contêiner -f
 
 > iniciar um contêiner
+
+start = iniciar
 
 docker start 7a515274fe7b
 
@@ -83,6 +91,8 @@ ex: criando uma pasta
 docker exec nome-do-contêiner mkdir /tmp/candido
 
 > entrar no contêiner em modo iterativo
+
+docker exec -it bash nginx
 
 docker exec -it nome-do-contêiner /bin/bash
 
@@ -101,11 +111,55 @@ ex:
 
 docker commit wpnginx nginxdefault:v1
 
+## Volumes
+
 > Volumes de dados  -v
 
 > baixando e iniciando uma imagem e criando um volume para projetos
 
+* -i = iterativo -t = tty para digitar no terminal
+
+* -v = volume, --name = nome do container
+
 docker run -it -v /data --name schoolofnet python /bin/bash
+
+> volumes de dados com mount --mount
+
+-d = detach
+-p = port
+--mount type=bind,source="$(pwd)",target=/usr/share/nginx/html
+
+docker run -d --name nginx -p 8080:80 --mount type=bind,source="$(pwd)",target=/usr/share/nginx/html nginx
+
+* -v = volume cria a pasta caso ela não exista
+
+* --mount = não cria a pasta, e caso não exista, retorna erro
+
+> removendo volumes
+
+docker volume rm nome-do-volume
+
+> removendo todos volumes
+
+docker volume prune
+
+> criando volume
+
+docker volume create --name nome-do-volume
+
+> lista todos o volumes
+
+docker volume ls
+
+> inspecionando um volume
+
+* retorna um json dos dados do volume
+
+docker volume inspect nome-do-volume
+
+
+
+## dicas de comandos
 
 > inspeciaondo o container, retornará um json de informações
 
@@ -115,7 +169,6 @@ ex:
 docker inspect schoolofnet
 
 > restartar um container
-
 
 docker restart nome-do-container
 
@@ -287,6 +340,3 @@ $ docker swarm init --advertise-addr
 > dicas
 
 https://woliveiras.com.br/posts/comandos-mais-utilizados-no-docker/
-
-https://woliveiras.com.br/posts/comandos-mais-utilizados-no-docker/
-
