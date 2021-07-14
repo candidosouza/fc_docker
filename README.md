@@ -166,6 +166,22 @@ docker run --name nginx02 -d --mount type=volume,source=candidosouzadesenvolvedo
 docker run --name nginx -d -v meuvolume:app/ nginx
 
 
+## imagens
+
+> ver imagens no pc
+
+docker images
+
+> removendo uma imagem
+
+docker rmi nome-imagem:tag
+
+> remover todas as imagens
+
+docker rmi $(docker images)
+ 
+
+
 ## dicas de comandos
 
 > inspeciaondo o container, retornará um json de informações
