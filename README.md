@@ -157,6 +157,13 @@ docker volume ls
 
 docker volume inspect nome-do-volume
 
+* obs, volumes pódem ser compartilhados entre containers
+
+docker run --name nginx -d --mount type=volume,source=candidosouzadesenvolvedorfullcycle,target=/app nginx
+
+docker run --name nginx02 -d --mount type=volume,source=candidosouzadesenvolvedorfullcycle,target=/app nginx
+
+docker run --name nginx -d -v meuvolume:app/ nginx
 
 
 ## dicas de comandos
