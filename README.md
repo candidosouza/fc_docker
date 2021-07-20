@@ -168,7 +168,7 @@ docker run --name nginx -d -v meuvolume:app/ nginx
 
 ## imagens
 
-> ver imagens no pc
+> ver imagens
 
 docker images
 
@@ -179,6 +179,20 @@ docker rmi nome-imagem:tag
 > remover todas as imagens
 
 docker rmi $(docker images)
+
+> baixar uma imagem, não roda o container
+
+docker pull php
+
+> baixar uma imagem com sua tag
+
+docker pull php:rc-alpine
+
+> criando uma imagem no docker
+
+* -t = tag
+
+docker build -t candidosouzza/nginx-vim:latest .
  
 
 
