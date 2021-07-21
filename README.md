@@ -197,8 +197,21 @@ docker pull php:rc-alpine
 * -t = tag
 
 docker build -t candidosouzza/nginx-vim:latest .
- 
 
+
+> criando uma imagem
+
+* criar o Dockerfile e rodar o comando
+
+docker build -t candidosouzza/nginx-fullcycle .
+
+* rode a imagem
+
+docker run --rm -d -p 8080:80 candidosouzza/nginx-fullcycle
+ 
+* subir a imagem no docker hub
+
+docker push candidosouzza/nginx-fullcycle
 
 ## dicas de comandos
 
