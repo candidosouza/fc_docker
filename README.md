@@ -60,6 +60,10 @@ listar todos
 
 docker ps -a ou --all
 
+* -a = all, -q = mostra somente os id's
+
+docker ps -a -q
+
 > parar um contêiner, o container não é desistalado, apenas parado
 
 docker stop id-do-contêiner
