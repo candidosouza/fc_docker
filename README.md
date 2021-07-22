@@ -215,8 +215,24 @@ docker push candidosouzza/nginx-fullcycle
 
 ## Networks
 
+tipos
+* bridge
+O driver de rede padrão. Se você não especificar um driver, este é o tipo de rede que você está criando. As redes de ponte geralmente são usadas quando seus aplicativos são executados em contêineres autônomos que precisam se comunicar.
 
-> Configuração de Networks externas
+* host
+Para contêineres autônomos, remova o isolamento de rede entre o contêiner e o host Docker e use a rede do host diretamente.
+
+* overlay
+Redes de sobreposição conectam vários daemons Docker e permitem que os serviços de swarm se comuniquem entre si. Você também pode usar redes de sobreposição para facilitar a comunicação entre um serviço swarm e um contêiner independente, ou entre dois contêineres independentes em diferentes daemons do Docker. Essa estratégia elimina a necessidade de fazer o roteamento no nível do sistema operacional entre esses contêineres
+
+* maclan
+As redes Macvlan permitem que você atribua um endereço MAC a um contêiner, fazendo com que ele apareça como um dispositivo físico em sua rede. O daemon Docker roteia o tráfego para contêineres por meio de seus endereços MAC. Usar o macvlan driver às vezes é a melhor escolha ao lidar com aplicativos legados que esperam ser conectados diretamente à rede física, em vez de roteados pela pilha de rede do host Docker
+
+* none
+Para este contêiner, desative todas as redes. Normalmente usado em conjunto com um driver de rede personalizado. none's não está disponível para serviços de swarm.
+
+
+> Configuração de Network externa
 
 * windows - inserir no arquivo C:\Windows\system32\drivers\etc\hosts
 
