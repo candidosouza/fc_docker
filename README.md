@@ -217,7 +217,7 @@ docker push candidosouzza/nginx-fullcycle
 
 ## Networks
 
-tipos
+##### tipos
 * bridge
 O driver de rede padrão. Se você não especificar um driver, este é o tipo de rede que você está criando. As redes de ponte geralmente são usadas quando seus aplicativos são executados em contêineres autônomos que precisam se comunicar.
 
@@ -232,6 +232,8 @@ As redes Macvlan permitem que você atribua um endereço MAC a um contêiner, fa
 
 * none
 Para este contêiner, desative todas as redes. Normalmente usado em conjunto com um driver de rede personalizado. none's não está disponível para serviços de swarm.
+
+##### comandos network's
 
 > lista todos as networks
 
@@ -259,18 +261,54 @@ docker network prune
 
 docker network --help
 
-> Configuração de Network externa
+##### Configuração de Network externa default bridge
 
 * windows - inserir no arquivo C:\Windows\system32\drivers\etc\hosts
 
 * linux - inserir no arquivo ~/etc/hosts
 
+```
 127.0.0.1 host.docker.internal
+```
 
 * docker-compose.yml inserir no container principal
 
+```
 extra_hosts:
-      - "host.docker.internal:172.17.0.1"
+  - "host.docker.internal:172.17.0.1"
+```
+
+##### configurando containers com network
+
+docker run -d -it --name ubuntu1 bash
+
+docker run -d -it --name ubuntu2 bash
+
+
+docker network inspect bridge
+
+* saida :
+
+```
+...
+"Containers": {
+            "40bb7ed507c106049a865fc04b3c3dcb1395f12a4657845678b4d522ebcd9979": {
+                "Name": "ubuntu1",
+                "EndpointID": "3c20d358958ed55c976518009f1a409cbcf84dfddcc3cb53703100e20eb9708a",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            },
+            "dcbe4b35b1b6d8354be851dadfe38024223ce587fa1e293f6195d72952ef4f25": {
+                "Name": "ubuntu2",
+                "EndpointID": "2bbbbef037fdca43c8e6e43142bf6619e83a3b02910c319ed4082790ef6e243c",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+...
+```
 
 ## Dicas de comandos
 
