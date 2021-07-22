@@ -119,26 +119,6 @@ docker commit wpnginx nginxdefault:v1
 
 > Volumes de dados  -v
 
-> baixando e iniciando uma imagem e criando um volume para projetos
-
-* -i = iterativo -t = tty para digitar no terminal
-
-* -v = volume, --name = nome do container
-
-docker run -it -v /data --name schoolofnet python /bin/bash
-
-> volumes de dados com mount --mount
-
--d = detach
--p = port
---mount type=bind,source="$(pwd)",target=/usr/share/nginx/html
-
-docker run -d --name nginx -p 8080:80 --mount type=bind,source="$(pwd)",target=/usr/share/nginx/html nginx
-
-* -v = volume cria a pasta caso ela não exista
-
-* --mount = não cria a pasta, e caso não exista, retorna erro
-
 > removendo volumes
 
 docker volume rm nome-do-volume
@@ -164,6 +144,28 @@ docker volume inspect nome-do-volume
 * obs, volumes pódem ser compartilhados entre containers
 
 docker run --name nginx -d --mount type=volume,source=candidosouzadesenvolvedorfullcycle,target=/app nginx
+
+
+> baixando e iniciando uma imagem e criando um volume para projetos
+
+* -i = iterativo -t = tty para digitar no terminal
+
+* -v = volume, --name = nome do container
+
+docker run -it -v /data --name schoolofnet python /bin/bash
+
+> volumes de dados com mount --mount
+
+-d = detach
+-p = port
+--mount type=bind,source="$(pwd)",target=/usr/share/nginx/html
+
+docker run -d --name nginx -p 8080:80 --mount type=bind,source="$(pwd)",target=/usr/share/nginx/html nginx
+
+* -v = volume cria a pasta caso ela não exista
+
+* --mount = não cria a pasta, e caso não exista, retorna erro
+
 
 docker run --name nginx02 -d --mount type=volume,source=candidosouzadesenvolvedorfullcycle,target=/app nginx
 
@@ -231,6 +233,31 @@ As redes Macvlan permitem que você atribua um endereço MAC a um contêiner, fa
 * none
 Para este contêiner, desative todas as redes. Normalmente usado em conjunto com um driver de rede personalizado. none's não está disponível para serviços de swarm.
 
+> lista todos as networks
+
+docker network ls
+
+> criando uma network
+
+docker network create --name nome-do-volume
+
+> inspecionando uma network
+
+* retorna um json dos dados da network
+
+docker network inspect id-da-network (ou) nome-da-network
+
+> removendo network
+
+docker network rm nome-da-network
+
+> removendo todos as networks não usadas
+
+docker network prune
+
+> ajuda com networks
+
+docker network --help
 
 > Configuração de Network externa
 
