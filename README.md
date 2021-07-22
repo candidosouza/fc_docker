@@ -170,7 +170,7 @@ docker run --name nginx02 -d --mount type=volume,source=candidosouzadesenvolvedo
 docker run --name nginx -d -v meuvolume:app/ nginx
 
 
-## imagens
+## Imagens
 
 > ver imagens
 
@@ -213,7 +213,23 @@ docker run --rm -d -p 8080:80 candidosouzza/nginx-fullcycle
 
 docker push candidosouzza/nginx-fullcycle
 
-## dicas de comandos
+## Networks
+
+
+> Configuração de Networks externas
+
+* windows - inserir no arquivo C:\Windows\system32\drivers\etc\hosts
+
+* linux - inserir no arquivo ~/etc/hosts
+
+127.0.0.1 host.docker.internal
+
+* docker-compose.yml inserir no container principal
+
+extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+
+## Dicas de comandos
 
 > inspeciaondo o container, retornará um json de informações
 
