@@ -321,7 +321,7 @@ docker network ls
 ##### criando uma network
 
 ```
-docker network create --name nome-do-volume
+docker network create --drive bridge nome-da-rede 
 ```
 
 ##### inspecionando uma network
@@ -404,6 +404,8 @@ docker network inspect bridge
         },
 ...
 ```
+
+## Hosts
 
 ## Dicas de comandos
 
