@@ -351,24 +351,7 @@ docker network prune
 docker network --help
 ```
 
-##### Configuração de Network externa default bridge
-
-* windows - inserir no arquivo C:\Windows\system32\drivers\etc\hosts
-
-* linux - inserir no arquivo ~/etc/hosts
-
-```
-127.0.0.1 host.docker.internal
-```
-
-* docker-compose.yml inserir no container principal
-
-```
-extra_hosts:
-  - "host.docker.internal:172.17.0.1"
-```
-
-##### configurando containers com network
+##### configurando containers com network bridge
 
 ```
 docker run -d -it --name ubuntu1 bash
@@ -405,7 +388,29 @@ docker network inspect bridge
 ...
 ```
 
-## Hosts
+##### Configuração de Network externa default bridge
+
+* windows - inserir no arquivo C:\Windows\system32\drivers\etc\hosts
+
+* linux - inserir no arquivo ~/etc/hosts
+
+```
+127.0.0.1 host.docker.internal
+```
+
+* docker-compose.yml inserir no container principal
+
+```
+extra_hosts:
+  - "host.docker.internal:172.17.0.1"
+```
+
+*  Acesso do container para localhost na maquina com extra hosts
+
+```
+curl http://host.docker.internal:8000
+```
+
 
 ## Dicas de comandos
 
