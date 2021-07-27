@@ -16,7 +16,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # instalação do laravel
 RUN php composer.phar create-project --prefer-dist laravel/laravel laravel
 
+# rodando o server do laravel dentro do container
 ENTRYPOINT ["php","laravel/artisan","serve"]
 
+# passanso via comando o host como parametro
 CMD ["--host=0.0.0.0"]
 
