@@ -1,0 +1,33 @@
+FROM php:7.4-cli AS builder
+
+WORKDIR /var/www
+
+RUN apt-get update && apt-get upgrade -y && \
+    # lib para ajudar na instalação do laravel
+    apt-get install libzip-dev -y && \
+    # extensão docker para php
+    docker-php-ext-install zip
+
+# instalando o composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');"
+
+# instalação do laravel
+RUN php composer.phar create-project --prefer-dist laravel/laravel laravel
+
+# multistage building
+FROM php:7.4-fpm-alpine
+
+WORKDIR /var/www
+
+RUN rm -rf /var/www/html
+
+COPY --from=builder /var/www/laravel .
+
+# alterando o dono do grupo para o usuário ww-data ser dono do conteudo /var/www
+RUN chown -R www-data:www-data /var/www
+
+EXPOSE 9000
+
+CMD ["php-fpm"]
