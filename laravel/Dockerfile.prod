@@ -28,6 +28,8 @@ COPY --from=builder /var/www/laravel .
 # alterando o dono do grupo para o usuário ww-data ser dono do conteudo /var/www
 RUN chown -R www-data:www-data /var/www
 
+RUN ln -s pulic html
+
 EXPOSE 9000
 
 CMD ["php-fpm"]
