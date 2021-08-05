@@ -17,22 +17,30 @@ services:
     depends_on: 
        - db
 
+  # nome do serviço
   db:
+    # nome da imagem utilizadas
     image: mysql:5.7
+    # configuração exclusiva para o mysql
     command: --innodb-use-native-aio=0
+    # nome do container
     container_name: db
+    # caso o container caia, ele inicia novamente
     restart: always
+    # para entrar no container de forma iterativa
     tty: true
+    # volumes para o container
     volumes: 
       - ./mysql:/var/lib/mysql
+    # setando a variável de ambiente para o mysql
     environment: 
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
+    # network para a comunicação entre os contaners
     networks: 
       - node-network
 
-    
-
+# criando a network
 networks: 
   node-network:
     driver: bridge    
