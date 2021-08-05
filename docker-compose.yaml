@@ -2,18 +2,27 @@ version: '3'
 
 services: 
 
+   # nome do serviço
   app:
     build: 
       context: node
+    # nome do container
     container_name: app
+    # dockerrize instalado no dockerfile, aguarda o container db de 20 em 20 seg, 
+    # até q ele suba completamente, após o container subir, ele chama o entrypoint
+    # que está na imagem padrão do node
     entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
     networks: 
       - node-network
+    # volumes para o container
     volumes: 
       - ./node:/usr/src/app
+    # para entrar no container de forma iterativa
     tty: true
+    # liberando a porta 3000 local para se comunicar com a 3000 do container
     ports: 
       - "3000:3000"
+    # dependencia do container app, depende do container db
     depends_on: 
        - db
 
